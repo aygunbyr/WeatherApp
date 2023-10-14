@@ -1,54 +1,56 @@
 import React from 'react'
 import {
-  ImageBackground,
   SafeAreaView,
-  StyleSheet,
   Text,
+  StyleSheet,
+  ImageBackground,
+  StatusBar,
   View
 } from 'react-native'
+import moment from 'moment'
 import IconText from '../components/IconText'
 
-const City = () => {
+const City = ({ weatherData }) => {
+  const { name, country, population, sunrise, sunset } = weatherData
   const {
+    container,
     cityName,
     cityText,
-    container,
     countryName,
     imageLayout,
-    populationText,
     populationWrapper,
-    riseSetText,
+    populationText,
     riseSetWrapper,
+    riseSetText,
     rowLayout
   } = styles
-
   return (
     <SafeAreaView style={container}>
       <ImageBackground
         source={require('../../assets/city-background.jpg')}
         style={imageLayout}
       >
-        <Text style={[cityText, cityName]}>London</Text>
-        <Text style={[cityText, countryName]}>UK</Text>
+        <Text style={[cityName, cityText]}>{name}</Text>
+        <Text style={[countryName, cityText]}>{country}</Text>
         <View style={[populationWrapper, rowLayout]}>
           <IconText
-            iconName="user"
-            iconColor="red"
-            bodyText="8000"
+            iconName={'user'}
+            iconColor={'red'}
+            bodyText={`Population: ${population}`}
             bodyTextStyles={populationText}
           />
         </View>
         <View style={[riseSetWrapper, rowLayout]}>
           <IconText
-            iconName="sunrise"
-            iconColor="white"
-            bodyText="10:46:58am"
+            iconName={'sunrise'}
+            iconColor={'white'}
+            bodyText={moment(sunrise).format('h:mm:ss a')}
             bodyTextStyles={riseSetText}
           />
           <IconText
-            iconName="sunset"
-            iconColor="white"
-            bodyText="17:28:15pm"
+            iconName={'sunset'}
+            iconColor={'white'}
+            bodyText={moment(sunset).format('h:mm:ss a')}
             bodyTextStyles={riseSetText}
           />
         </View>
@@ -89,13 +91,13 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     marginTop: 30
   },
-  riseSetText: {
-    fontSize: 20,
-    color: 'white'
-  },
   rowLayout: {
     flexDirection: 'row',
     alignItems: 'center'
+  },
+  riseSetText: {
+    fontSize: 20,
+    color: 'white'
   }
 })
 
