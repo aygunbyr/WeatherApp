@@ -2,7 +2,6 @@ import React from 'react'
 import {
   ImageBackground,
   SafeAreaView,
-  StatusBar,
   StyleSheet,
   Text,
   View
@@ -60,8 +59,7 @@ const City = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    marginTop: StatusBar.currentHeight
+    flex: 1
   },
   imageLayout: {
     flex: 1
